@@ -1,4 +1,6 @@
 """ Dagger of Time script """
+from pyutils.cli.flags import verify_flag
+
 import os
 import sys
 import json
@@ -75,6 +77,16 @@ def verify_commands_to_run():
             run_command(jobtask["command"])
 
 
+def list_scheduled_commands():
+    jobs_data = load_data()
+
+    if 'commands' not in jobs_data:
+        print("No command was saved yet!")
+        return
+
+    for commands in jobs_data["commands"]:
+        print("- %s (%s)" % (commands["command"], commands["interval"]))
+
 
 def run_commands_loop():
     min_verification_time = 60
@@ -83,8 +95,11 @@ def run_commands_loop():
         verify_commands_to_run()
         time.sleep(min_verification_time)
 
+
 if __name__ == "__main__":
-    if len(sys.argv) == 3:
+    if verify_flag("-l") or verify_flag("--list"):
+        list_scheduled_commands()
+    elif len(sys.argv) == 3:
         interval_minutes = sys.argv[1]
         command = sys.argv[2]
         save_command(interval_minutes, command)
