@@ -1,3 +1,5 @@
+from pyutils.cli.clitools import run_cmd
+
 import sys
 import time
 import subprocess
@@ -13,9 +15,7 @@ while True:
         run_index, target_command))
     print("########################################")
     subprocess_cmd = target_command
-    subprocess_output = subprocess.check_output(subprocess_cmd, shell=True)
-    subprocess_output = subprocess_output.decode("utf8")
-    subprocess_output = subprocess_output.strip()
+    subprocess_output = run_cmd(target_command, load_bashrc=True, live_log=True)
     print(subprocess_output)
     print("")
     time.sleep(int(time_interval))
