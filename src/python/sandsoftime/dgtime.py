@@ -1,4 +1,5 @@
 """ Dagger of Time script """
+from pyutils.cli.clitools import run_cmd
 from pyutils.cli.flags import verify_flag
 
 import os
@@ -6,7 +7,6 @@ import sys
 import json
 import time
 import datetime
-import subprocess
 
 
 def get_jobs_data_path():
@@ -57,11 +57,8 @@ def save_command(interval_minutes, command):
 def run_command(target_command):
     print("# Dagger of Time - Running command: \n%s" % (target_command))
     print("########################################")
-    subprocess_cmd = target_command
-    subprocess_output = subprocess.check_output(subprocess_cmd, shell=True)
-    subprocess_output = subprocess_output.decode("utf8")
-    subprocess_output = subprocess_output.strip()
-    print(subprocess_output)
+    command_output = run_cmd(target_command)
+    print(command_output)
     print("")
 
 
