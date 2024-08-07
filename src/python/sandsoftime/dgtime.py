@@ -93,8 +93,15 @@ def run_commands_loop():
         time.sleep(min_verification_time)
 
 
+def print_usage():
+    print("Usage: dgtime [interval_minutes] [command]")
+    print("       dgtime -l | --list")
+
+
 if __name__ == "__main__":
-    if verify_flag("-l") or verify_flag("--list"):
+    if verify_flag(["-h", "--help"]):
+        print_usage()
+    elif verify_flag(["-l", "--list"]):
         list_scheduled_commands()
     elif len(sys.argv) == 3:
         interval_minutes = sys.argv[1]
