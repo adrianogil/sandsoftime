@@ -122,6 +122,8 @@ if __name__ == "__main__":
         print_usage()
     elif verify_flag(["-l", "--list"]):
         list_scheduled_commands()
+    elif verify_flag(["-p", "--path"]):
+        print(get_jobs_data_path())
     elif len(sys.argv) >= 3:
         interval_minutes = sys.argv[1]
         command = sys.argv[2]
