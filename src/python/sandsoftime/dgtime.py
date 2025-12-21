@@ -90,7 +90,7 @@ def verify_commands_to_run():
             jobtask["times_ran"] += 1
 
     write_to_file(jobs_data_path, jobs_data)
-    print("Update file %s" % jobs_data_path)
+    print(today.strftime('%Y.%m.%d-%Hh%Mm') + " - Update file %s" % jobs_data_path)
 
 
 def list_scheduled_commands():
